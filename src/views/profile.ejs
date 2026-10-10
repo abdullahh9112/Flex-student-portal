@@ -1,0 +1,31 @@
+<%- include('partials/head') %>
+<% const active='profile'; %>
+<%- include('partials/shell-open', { active }) %>
+
+  <h1>Profile</h1>
+  <div class="page-sub">Your account details.</div>
+
+  <div class="card">
+    <table>
+      <tr><th>Full name</th><td><%= user.full_name %></td></tr>
+      <tr><th>Username</th><td class="mono"><%= user.username %></td></tr>
+      <tr><th>Email</th><td><%= user.email %></td></tr>
+      <tr><th>Role</th><td><%= user.role %></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Change password</h3>
+    <p class="muted">Update the password for your Flex account.</p>
+    <form action="/change-password" method="POST">
+      <!-- In SAFE mode this token is validated server-side; in
+           VULNERABLE mode it is ignored, so the action can be
+           triggered by any external page (CSRF). -->
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label for="newPassword">New password</label>
+      <input type="text" id="newPassword" name="newPassword" placeholder="Enter a new password">
+      <button class="btn" type="submit">Update password</button>
+    </form>
+  </div>
+
+<%- include('partials/shell-close') %>

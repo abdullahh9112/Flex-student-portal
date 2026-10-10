@@ -1,0 +1,32 @@
+<%- include('partials/head') %>
+<% const active='dashboard'; %>
+<%- include('partials/shell-open', { active }) %>
+
+  <h1>Dashboard</h1>
+  <div class="page-sub">Welcome back, <%= currentUser.full_name %>.</div>
+
+  <div class="stat-row">
+    <div class="stat">
+      <div class="num"><%= courseCount %></div>
+      <div class="lbl">Enrolled courses</div>
+    </div>
+    <div class="stat">
+      <div class="num"><%= gradeRows %></div>
+      <div class="lbl">Graded results</div>
+    </div>
+    <div class="stat">
+      <div class="num"><%= currentUser.role === 'admin' ? 'Admin' : 'Student' %></div>
+      <div class="lbl">Account type</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Quick links</h3>
+    <p class="muted">Use the sidebar to browse your courses, check grades, search the
+    catalogue, or post on the class wall.</p>
+    <a class="btn" href="/courses">View my courses</a>
+    &nbsp;
+    <a class="btn ghost" href="/search">Search catalogue</a>
+  </div>
+
+<%- include('partials/shell-close') %>

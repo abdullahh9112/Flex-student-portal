@@ -1,0 +1,29 @@
+<%- include('partials/head') %>
+<% const active='courses'; %>
+<%- include('partials/shell-open', { active }) %>
+
+  <h1>My Courses</h1>
+  <div class="page-sub">Courses you are currently enrolled in.</div>
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr><th>Code</th><th>Title</th><th>Credits</th><th>Instructor</th></tr>
+      </thead>
+      <tbody>
+        <% if (courses.length === 0) { %>
+          <tr><td colspan="4" class="muted">You are not enrolled in any courses yet.</td></tr>
+        <% } %>
+        <% courses.forEach(c => { %>
+          <tr>
+            <td class="mono"><%= c.code %></td>
+            <td><%= c.title %></td>
+            <td><%= c.credits %></td>
+            <td><%= c.instructor %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+<%- include('partials/shell-close') %>

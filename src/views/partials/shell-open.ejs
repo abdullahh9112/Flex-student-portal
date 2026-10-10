@@ -1,0 +1,22 @@
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand">Fle<span>x</span></div>
+    <nav>
+      <a href="/dashboard" class="<%= active==='dashboard'?'active':'' %>">Dashboard</a>
+      <a href="/courses"   class="<%= active==='courses'?'active':'' %>">My Courses</a>
+      <a href="/grades"    class="<%= active==='grades'?'active':'' %>">My Grades</a>
+      <a href="/search"    class="<%= active==='search'?'active':'' %>">Course Search</a>
+      <a href="/wall"      class="<%= active==='wall'?'active':'' %>">Class Wall</a>
+      <a href="/welcome"   class="<%= active==='welcome'?'active':'' %>">Welcome Board</a>
+      <a href="/profile"   class="<%= active==='profile'?'active':'' %>">Profile</a>
+    </nav>
+  </aside>
+  <div class="content">
+    <div class="topbar">
+      <div class="who">Welcome to Flex</div>
+      <form action="/logout" method="POST" style="margin:0">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button class="btn ghost" type="submit">Log out</button>
+      </form>
+    </div>
+    <div class="main">

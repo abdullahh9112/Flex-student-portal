@@ -1,0 +1,33 @@
+<%- include('partials/head') %>
+<% const active='wall'; %>
+<%- include('partials/shell-open', { active }) %>
+
+  <h1>Class Wall</h1>
+  <div class="page-sub">Post a message for your classmates. Everyone can see the wall.</div>
+
+  <div class="card">
+    <form action="/wall" method="POST">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label for="body">New post</label>
+      <textarea id="body" name="body" rows="3" placeholder="Share something with the class..."></textarea>
+      <button class="btn" type="submit">Post to wall</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h3>Recent posts</h3>
+    <% posts.forEach(p => { %>
+      <div class="post">
+        <div class="meta">
+          <b><%= p.author %></b> · <%= p.created_at %>
+        </div>
+        <!-- STORED XSS: body is rendered here for every visitor.
+             In vulnerable mode outputText() returns it raw, so a
+             saved <script>/<img onerror> payload executes for
+             anyone who opens the wall. -->
+        <div class="body"><%- outputText(p.body) %></div>
+      </div>
+    <% }) %>
+  </div>
+
+<%- include('partials/shell-close') %>

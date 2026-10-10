@@ -1,0 +1,29 @@
+<%- include('partials/head') %>
+<% const active='grades'; %>
+<%- include('partials/shell-open', { active }) %>
+
+  <h1>My Grades</h1>
+  <div class="page-sub">Your results for graded courses.</div>
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr><th>Code</th><th>Course</th><th>Grade</th><th>Marks</th></tr>
+      </thead>
+      <tbody>
+        <% if (grades.length === 0) { %>
+          <tr><td colspan="4" class="muted">No grades posted yet.</td></tr>
+        <% } %>
+        <% grades.forEach(g => { %>
+          <tr>
+            <td class="mono"><%= g.code %></td>
+            <td><%= g.title %></td>
+            <td><b><%= g.grade %></b></td>
+            <td><%= g.marks %>/100</td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+<%- include('partials/shell-close') %>

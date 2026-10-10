@@ -1,0 +1,19 @@
+<%- include('partials/head') %>
+<% const active='welcome'; %>
+<%- include('partials/shell-open', { active }) %>
+
+  <h1>Welcome Board</h1>
+
+  <div class="card">
+    <p>Welcome <span id="greeting-target">to Flex!</span></p>
+  </div>
+
+  <!-- The mode flag is handed to the client so the script knows
+       which DOM sink to use. This is ONLY for the teaching demo;
+       a real app would never expose this. -->
+  <script>
+    window.FLEX_MODE = "<%= MODE %>";
+  </script>
+  <script src="/static/js/dom-xss.js"></script>
+
+<%- include('partials/shell-close') %>

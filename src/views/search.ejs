@@ -1,0 +1,48 @@
+<%- include('partials/head') %>
+<% const active='search'; %>
+<%- include('partials/shell-open', { active }) %>
+
+  <h1>Course Search</h1>
+  <div class="page-sub">Search the course catalogue by title.</div>
+
+  <div class="card">
+    <form action="/search" method="GET">
+      <label for="q">Search courses</label>
+      <input type="search" id="q" name="q" value="<%= q === null ? '' : outputText(q) %>"
+             placeholder="e.g. Database">
+      <button class="btn" type="submit">Search</button>
+    </form>
+  </div>
+
+  <% if (q !== null) { %>
+    <div class="card">
+      <!-- REFLECTED XSS: the search term is echoed back here.
+           In vulnerable mode outputText() returns it raw. -->
+      <h3>Results for: <%- outputText(q) %></h3>
+
+      <% if (error) { %>
+        <div class="alert error"><%= error %></div>
+      <% } %>
+
+      <% if (results && results.length > 0) { %>
+        <table>
+          <thead>
+            <tr><% columns.forEach(col => { %><th><%= col %></th><% }) %></tr>
+          </thead>
+          <tbody>
+            <% results.forEach(row => { %>
+              <tr>
+                <% columns.forEach(col => { %>
+                  <td><%- outputText(row[col]) %></td>
+                <% }) %>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      <% } else if (!error) { %>
+        <p class="muted">No courses matched your search.</p>
+      <% } %>
+    </div>
+  <% } %>
+
+<%- include('partials/shell-close') %>

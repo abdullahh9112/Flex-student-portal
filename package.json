@@ -1,0 +1,32 @@
+{
+  "name": "flex-student-portal",
+  "version": "1.0.0",
+  "description": "Flex Student Portal - Web Security teaching project with switchable Vulnerable/Safe versions (XSS, CSRF, SQL Injection).",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "vulnerable": "MODE=vulnerable node src/server.js",
+    "safe": "MODE=safe node src/server.js",
+    "attacker": "node attacker/attacker-server.js",
+    "reset-db": "node src/db/seed.js"
+  },
+  "keywords": [
+    "security",
+    "xss",
+    "csrf",
+    "sql-injection",
+    "education"
+  ],
+  "author": "Fahad Saleem",
+  "license": "MIT",
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0"
+  }
+}
